@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#07111f">
+<meta property="og:title" content="Cadena de Llamadas – Semana Santa Girardota 2026">
+<meta property="og:description" content="Sistema de coordinación de emergencias del Municipio de Girardota. Semana Santa 2026.">
+<title>Cadena de Llamadas – Emergencias Girardota 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   BASE
+═══════════════════════════════════════ */
+:root{
+  --bg0:#07111f;
+  --bg1:#0a1a30;
+  --oro:#f5c518;
+  --oro2:#ffe066;
+  --verde:#27ae60;
+  --gris:#4a6080;
+  --blanco:#e8f0fe;
+  --borde:rgba(245,197,24,.22);
+  --shadow:rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg0);
+  font-family:'Exo 2',sans-serif;
+  color:var(--blanco);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.page{
+  position:relative;z-index:1;
+  max-width:1060px;margin:0 auto;
+  padding:14px 10px 50px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+.hdr{
+  text-align:center;width:100%;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--borde);
+  margin-bottom:6px;
+}
+.hdr-escu{font-size:2rem;filter:drop-shadow(0 0 10px var(--oro));animation:glow 3s ease-in-out infinite;}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px var(--oro));}50%{filter:drop-shadow(0 0 24px var(--oro2));}}
+.hdr-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(1.1rem,4vw,1.75rem);
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--oro);margin-top:4px;
+}
+.hdr-sub{font-size:.72rem;color:var(--gris);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.hdr-badges{display:flex;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  border-radius:20px;padding:3px 11px;font-size:.68rem;
+  font-family:'Rajdhani',sans-serif;letter-spacing:.07em;
+}
+.badge-live{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.35);color:#30d158;}
+.badge-mun {background:rgba(245,197,24,.1); border:1px solid rgba(245,197,24,.3); color:var(--oro);}
+.dot{width:7px;height:7px;border-radius:50%;background:#30d158;animation:blink .9s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* ═══════════════════════════════════════
+   SECCIÓN LABEL
+═══════════════════════════════════════ */
+.sec-label{
+  font-family:'Rajdhani',sans-serif;
+  font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gris);
+  display:flex;align-items:center;gap:8px;
+  width:100%;max-width:900px;
+  margin:16px 0 6px;
+}
+.sec-label::before,.sec-label::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,197,24,.2),transparent);
+}
+
+/* ═══════════════════════════════════════
+   CONECTOR VERTICAL
+═══════════════════════════════════════ */
+.cv{
+  width:3px;border-radius:2px;
+  background:linear-gradient(to bottom,var(--oro),rgba(245,197,24,.25));
+  position:relative;
+}
+.cv::after{
+  content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);
+  border-left:7px solid transparent;border-right:7px solid transparent;
+  border-top:9px solid rgba(245,197,24,.55);
+}
+.cv-tall{height:44px;}
+.cv-med {height:36px;}
+.cv-short{height:28px;}
+
+/* ═══════════════════════════════════════
+   BARRA HORIZONTAL
+═══════════════════════════════════════ */
+.bh{
+  width:90%;max-width:880px;height:3px;
+  background:linear-gradient(90deg,transparent 0%,rgba(245,197,24,.55) 15%,rgba(245,197,24,.55) 85%,transparent 100%);
+  border-radius:2px;
+}
+
+/* ═══════════════════════════════════════
+   NODO ALCALDE
+═══════════════════════════════════════ */
+.n-alcalde{
+  background:linear-gradient(135deg,#3b0d56,#7d3c98);
+  border:2px solid var(--oro);
+  border-radius:18px;padding:18px 32px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(125,60,152,.5),0 0 80px rgba(245,197,24,.12);
+  animation:pAlcalde 3s ease-in-out infinite;
+  min-width:220px;max-width:320px;
+}
+@keyframes pAlcalde{
+  0%,100%{box-shadow:0 0 30px rgba(125,60,152,.5),0 0 60px rgba(245,197,24,.1);}
+  50%{box-shadow:0 0 50px rgba(125,60,152,.75),0 0 100px rgba(245,197,24,.22);}
+}
+.na-escu{font-size:1.9rem;margin-bottom:4px;}
+.na-tag{font-family:'Rajdhani',sans-serif;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oro2);opacity:.8;}
+.na-nom{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-top:2px;}
+.na-car{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:2px;}
+
+/* ═══════════════════════════════════════
+   NODO COORDINADOR (nivel 1)
+═══════════════════════════════════════ */
+.n-coord{
+  background:linear-gradient(135deg,#0d3b1e,#1e8449);
+  border:2px solid rgba(30,132,73,.6);
+  border-radius:15px;padding:15px 24px;
+  text-align:center;
+  box-shadow:0 6px 28px rgba(30,132,73,.4);
+  min-width:270px;max-width:360px;
+  transition:transform .2s,box-shadow .2s;
+}
+.n-coord:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(30,132,73,.6);}
+.nc-tag{font-family:'Rajdhani',sans-serif;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:3px;}
+.nc-ico{font-size:1.5rem;margin-bottom:3px;}
+.nc-titulo{font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:1.2;}
+.nc-nom{font-size:.83rem;font-weight:600;color:#a8e6bf;margin-top:4px;}
+.nc-tel{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:1px;}
+
+/* ═══════════════════════════════════════
+   BOTÓN LLAMAR
+═══════════════════════════════════════ */
+.btn-call{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  background:linear-gradient(135deg,#166b16,#27ae60);
+  color:#fff;text-decoration:none;
+  border-radius:50px;padding:8px 20px;
+  font-family:'Rajdhani',sans-serif;font-size:.88rem;letter-spacing:.09em;
+  box-shadow:0 3px 16px rgba(39,174,96,.5);
+  margin-top:10px;
+  animation:callP 2s ease-in-out infinite;
+  transition:transform .15s;
+  border:none;cursor:pointer;
+  -webkit-touch-callout:none;
+  touch-action:manipulation;
+}
+.btn-call:hover{transform:scale(1.06);}
+.btn-call:active{transform:scale(.97);}
+@keyframes callP{0%,100%{box-shadow:0 3px 14px rgba(39,174,96,.5);}50%{box-shadow:0 3px 28px rgba(39,174,96,.9);}}
+
+.btn-call-sm{
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  background:linear-gradient(135deg,#166b16,#27ae60);
+  color:#fff;text-decoration:none;
+  border-radius:50px;padding:6px 13px;
+  font-family:'Rajdhani',sans-serif;font-size:.75rem;letter-spacing:.07em;
+  box-shadow:0 2px 10px rgba(39,174,96,.4);
+  margin-top:7px;
+  animation:callP 2s ease-in-out infinite;
+  transition:transform .15s;
+  border:none;cursor:pointer;
+  touch-action:manipulation;
+  white-space:nowrap;
+}
+.btn-call-sm:hover{transform:scale(1.07);}
+.btn-call-sm:active{transform:scale(.96);}
+
+/* ═══════════════════════════════════════
+   FILAS DE NODOS HIJOS
+═══════════════════════════════════════ */
+.fila{
+  width:100%;display:flex;justify-content:center;
+  gap:10px;flex-wrap:wrap;padding:0 6px;
+}
+.hijo-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;
+}
+.hijo-wrap.w-sm{min-width:140px;max-width:175px;}
+.hijo-wrap.w-md{min-width:155px;max-width:195px;}
+.hijo-wrap.w-lg{min-width:165px;max-width:210px;}
+
+/* ── nodo hijo ── */
+.n-hijo{
+  border-radius:13px;padding:12px 9px;
+  text-align:center;width:100%;
+  border:1.5px solid rgba(255,255,255,.1);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;
+}
+.n-hijo:hover{transform:translateY(-4px);}
+.nh-ico{font-size:1.45rem;margin-bottom:3px;}
+.nh-titulo{
+  font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.2;color:#fff;
+}
+.nh-nom{font-size:.7rem;font-weight:600;margin-top:3px;}
+.nh-tel{font-size:.62rem;color:rgba(255,255,255,.38);margin-top:2px;}
+
+/* colores nodos */
+.c-bomberos{background:linear-gradient(135deg,#6e1a1a,#c0392b);box-shadow:0 5px 18px rgba(192,57,43,.35);}
+.c-cruzroja{background:linear-gradient(135deg,#8b0000,#c0392b);box-shadow:0 5px 18px rgba(192,57,43,.3);}
+.c-hospital {background:linear-gradient(135deg,#003366,#1a6fa5);box-shadow:0 5px 18px rgba(26,111,165,.35);}
+.c-transito {background:linear-gradient(135deg,#5a4000,#9a7d0a);box-shadow:0 5px 18px rgba(154,125,10,.3);}
+.c-policia  {background:linear-gradient(135deg,#0b2545,#1b4f72);box-shadow:0 5px 18px rgba(27,79,114,.4);}
+.c-gobierno {background:linear-gradient(135deg,#0d2060,#1a3a8f);box-shadow:0 5px 18px rgba(26,58,143,.35);}
+.c-salud    {background:linear-gradient(135deg,#005050,#0a8080);box-shadow:0 5px 18px rgba(10,128,128,.35);}
+.c-seguridad{background:linear-gradient(135deg,#1a1a40,#2d2d80);box-shadow:0 5px 18px rgba(45,45,128,.35);}
+.c-ambiente {background:linear-gradient(135deg,#0d3b00,#2d7a00);box-shadow:0 5px 18px rgba(45,122,0,.35);}
+.c-giraseo  {background:linear-gradient(135deg,#003322,#006644);box-shadow:0 5px 18px rgba(0,102,68,.35);}
+.c-iglesia  {background:linear-gradient(135deg,#3a1a00,#7a3800);box-shadow:0 5px 18px rgba(122,56,0,.35);}
+
+/* ── colores texto nh-nom por tipo ── */
+.t-rojo  {color:#ffaaaa;}
+.t-azul  {color:#a8d4ff;}
+.t-verde {color:#a8f0c0;}
+.t-oro   {color:#ffe099;}
+.t-cian  {color:#a0eeff;}
+.t-lima  {color:#c8ffaa;}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.footer{
+  margin-top:32px;text-align:center;
+  font-size:.62rem;color:var(--gris);
+  letter-spacing:.07em;line-height:1.7;
+  border-top:1px solid var(--borde);
+  padding-top:14px;width:100%;
+}
+.footer span{color:var(--oro);}
+.footer a{color:var(--oro);text-decoration:none;}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:640px){
+  .fila{gap:7px;}
+  .hijo-wrap.w-sm,.hijo-wrap.w-md,.hijo-wrap.w-lg{min-width:130px;max-width:155px;}
+  .n-hijo{padding:10px 7px;}
+  .nh-titulo{font-size:.68rem;}
+  .btn-call-sm{font-size:.68rem;padding:5px 10px;}
+  .n-alcalde{padding:14px 20px;}
+  .n-coord{padding:13px 16px;}
+}
+@media(max-width:480px){
+  .hijo-wrap.w-sm,.hijo-wrap.w-md,.hijo-wrap.w-lg{min-width:120px;max-width:145px;}
+  .nh-ico{font-size:1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="hdr">
+    <div class="hdr-escu">⚜️</div>
+    <div class="hdr-title">Cadena de Llamadas · Emergencias</div>
+    <div class="hdr-sub">Municipio de Girardota · Antioquia · Colombia</div>
+    <div class="hdr-badges">
+      <div class="badge badge-live"><div class="dot"></div>SISTEMA ACTIVO</div>
+      <div class="badge badge-mun">⚜️ SEMANA SANTA 2026</div>
+    </div>
+  </div>
+
+  <!-- ══ NIVEL 0: ALCALDE ══ -->
+  <div class="sec-label">Cabeza del Sistema</div>
+  <div class="n-alcalde">
+    <div class="na-escu">🏛️</div>
+    <div class="na-tag">Alcalde Municipal</div>
+    <div class="na-nom">Kevin Bernal</div>
+    <div class="na-car">Alcaldía de Girardota</div>
+  </div>
+
+  <div class="cv cv-tall"></div>
+
+  <!-- ══ NIVEL 1: COORDINACIÓN DE RESPUESTA ══ -->
+  <div class="sec-label">Coordinación de Respuesta</div>
+  <div class="fila" style="max-width:780px;gap:14px;">
+
+    <!-- Rubén Zuleta -->
+    <div class="hijo-wrap" style="min-width:260px;max-width:340px;flex:1;">
+      <div class="n-coord" style="width:100%;">
+        <div class="nc-tag">Coordinación</div>
+        <div class="nc-ico">⚠️</div>
+        <div class="nc-titulo">Gestión del Riesgo Municipal</div>
+        <div class="nc-nom">Rubén Zuleta</div>
+        <div class="nc-tel">+57 313 657 1096</div>
+        <a class="btn-call" href="tel:+573136571096" onclick="llamar(event,'tel:+573136571096')">📞 &nbsp;LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Diego Rojas -->
+    <div class="hijo-wrap" style="min-width:260px;max-width:340px;flex:1;">
+      <div class="n-coord" style="width:100%;background:linear-gradient(135deg,#0d2060,#1a3a8f);border-color:rgba(26,58,143,.6);box-shadow:0 6px 28px rgba(26,58,143,.4);">
+        <div class="nc-tag">Secretaría</div>
+        <div class="nc-ico">🏛️</div>
+        <div class="nc-titulo">Secretaría de Gobierno</div>
+        <div class="nc-nom" style="color:#a8c8ff;">Diego Rojas</div>
+        <div class="nc-tel">+57 316 497 3572</div>
+        <a class="btn-call" href="tel:+573164973572" onclick="llamar(event,'tel:+573164973572')">📞 &nbsp;LLAMAR</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cv cv-med"></div>
+  <div class="bh"></div>
+
+  <!-- ══ NIVEL 2: PRIMERA RESPUESTA ══ -->
+  <div class="sec-label">Primera Respuesta Operativa</div>
+  <div class="fila">
+
+    <!-- Bomberos -->
+    <div class="hijo-wrap w-sm">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-bomberos">
+        <div class="nh-ico">🚒</div>
+        <div class="nh-titulo">Bomberos Voluntarios</div>
+        <div class="nh-nom t-rojo">Girardota</div>
+        <div class="nh-tel">+57 321 758 5242</div>
+        <a class="btn-call-sm" href="tel:+573217585242">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Cruz Roja -->
+    <div class="hijo-wrap w-sm">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-cruzroja">
+        <div class="nh-ico">🩺</div>
+        <div class="nh-titulo">Cruz Roja Girardota</div>
+        <div class="nh-nom t-rojo">Alejandra Figueredo</div>
+        <div class="nh-tel">+57 319 214 5185</div>
+        <a class="btn-call-sm" href="tel:+573192145185">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Hospital -->
+    <div class="hijo-wrap w-sm">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-hospital">
+        <div class="nh-ico">🏥</div>
+        <div class="nh-titulo">Hospital San Rafael</div>
+        <div class="nh-nom t-azul">Gabriel Giraldo</div>
+        <div class="nh-tel">+57 311 769 3799</div>
+        <a class="btn-call-sm" href="tel:+573117693799">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Tránsito -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-transito">
+        <div class="nh-ico">🚦</div>
+        <div class="nh-titulo">Transporte y Tránsito</div>
+        <div class="nh-nom t-oro">Luis Carlos</div>
+        <div class="nh-tel">+57 319 217 3456</div>
+        <a class="btn-call-sm" href="tel:+573192173456">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Policía -->
+    <div class="hijo-wrap w-sm">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-policia">
+        <div class="nh-ico">👮</div>
+        <div class="nh-titulo">Policía Nacional</div>
+        <div class="nh-nom t-azul">Cte. Leandro</div>
+        <div class="nh-tel">+57 302 309 9756</div>
+        <a class="btn-call-sm" href="tel:+573023099756">📞 LLAMAR</a>
+      </div>
+    </div>
+
+  </div><!-- /fila primera respuesta -->
+
+  <div class="cv cv-med" style="margin-top:6px;"></div>
+  <div class="bh"></div>
+
+  <!-- ══ NIVEL 3: SEGUNDA LÍNEA ══ -->
+  <div class="sec-label">Segunda Línea de Atención</div>
+  <div class="fila">
+
+    <!-- Transporte (Joaquín) -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-transito">
+        <div class="nh-ico">🚌</div>
+        <div class="nh-titulo">Secretaría de Transporte</div>
+        <div class="nh-nom t-oro">Joaquín Hernández</div>
+        <div class="nh-tel">+57 314 761 0769</div>
+        <a class="btn-call-sm" href="tel:+573147610769" onclick="llamar(event,'tel:+573147610769')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Salud -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-salud">
+        <div class="nh-ico">💊</div>
+        <div class="nh-titulo">Secretaría de Salud</div>
+        <div class="nh-nom t-cian">Gladiz Arias</div>
+        <div class="nh-tel">+57 311 617 1096</div>
+        <a class="btn-call-sm" href="tel:+573116171096" onclick="llamar(event,'tel:+573116171096')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Seguridad y Convivencia -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-seguridad">
+        <div class="nh-ico">🛡️</div>
+        <div class="nh-titulo">Subsec. Seguridad y Convivencia</div>
+        <div class="nh-nom t-azul">Daniel Hernández</div>
+        <div class="nh-tel">+57 315 668 4506</div>
+        <a class="btn-call-sm" href="tel:+573156684506" onclick="llamar(event,'tel:+573156684506')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Ambiente -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-ambiente">
+        <div class="nh-ico">🌿</div>
+        <div class="nh-titulo">Sec. Ambiente y Sostenibilidad</div>
+        <div class="nh-nom t-lima">Eliana Cardona</div>
+        <div class="nh-tel">+57 311 746 6710</div>
+        <a class="btn-call-sm" href="tel:+573117466710" onclick="llamar(event,'tel:+573117466710')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Giraseo -->
+    <div class="hijo-wrap w-sm">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-giraseo">
+        <div class="nh-ico">♻️</div>
+        <div class="nh-titulo">Giraseo</div>
+        <div class="nh-nom t-verde">Yeison Tobón</div>
+        <div class="nh-tel">+57 304 396 9371</div>
+        <a class="btn-call-sm" href="tel:+573043969371" onclick="llamar(event,'tel:+573043969371')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+    <!-- Padre / Iglesia -->
+    <div class="hijo-wrap w-md">
+      <div class="cv cv-short"></div>
+      <div class="n-hijo c-iglesia">
+        <div class="nh-ico">⛪</div>
+        <div class="nh-titulo">Catedral N.S. del Rosario</div>
+        <div class="nh-nom t-oro">Padre Andrés</div>
+        <div class="nh-tel">+57 310 425 9485</div>
+        <a class="btn-call-sm" href="tel:+573104259485" onclick="llamar(event,'tel:+573104259485')">📞 LLAMAR</a>
+      </div>
+    </div>
+
+  </div><!-- /fila segunda línea -->
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">
+    <div>⚜️ &nbsp;<span>ALCALDÍA DE GIRARDOTA</span> · Sistema de Coordinación de Emergencias · <span>Semana Santa 2026</span></div>
+    <div style="margin-top:4px;">Emergencias nacionales: <span>📞 123</span> &nbsp;·&nbsp; Policía: <span>📞 112</span> &nbsp;·&nbsp; Bomberos: <span>📞 119</span></div>
+    <div style="margin-top:4px;font-size:.58rem;opacity:.55;">Este directorio es de uso público y operativo. Compartir libremente con los grupos de coordinación.</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ── fondo partículas ── */
+(function(){
+  const c=document.getElementById('bg');
+  const x=c.getContext('2d');
+  let W,H,pts=[];
+  function init(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+    pts=Array.from({length:50},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,
+      r:Math.random()*.9+.25,a:Math.random()*.25+.06
+    }));
+  }
+  function tick(){
+    x.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);
+      x.fillStyle=`rgba(245,197,24,${p.a})`;x.fill();
+    });
+    for(let i=0;i<pts.length;i++)
+      for(let j=i+1;j<pts.length;j++){
+        const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+        if(d<75){
+          x.beginPath();x.moveTo(pts[i].x,pts[i].y);
+          x.lineTo(pts[j].x,pts[j].y);
+          x.strokeStyle=`rgba(245,197,24,${.025*(1-d/75)})`;
+          x.lineWidth=.5;x.stroke();
+        }
+      }
+    requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',init);
+  init();tick();
+})();
+
+/* ── llamada robusta iOS + Android + desktop ── */
+function llamar(e, numero){
+  e.preventDefault();
+  e.stopPropagation();
+  // Intento 1: location.assign (más compatible con iOS Safari)
+  try{ window.location.assign(numero); }
+  catch(err){
+    // Intento 2: enlace temporal
+    const tmp=document.createElement('a');
+    tmp.href=numero;
+    document.body.appendChild(tmp);
+    tmp.click();
+    setTimeout(()=>document.body.removeChild(tmp),300);
+  }
+}
+// asegurar atributos en todos los enlaces tel:
+document.querySelectorAll('a[href^="tel:"]').forEach(a=>{
+  a.setAttribute('rel','noopener');
+  // También añadir listener directo como respaldo
+  a.addEventListener('touchend',function(ev){
+    ev.preventDefault();
+    window.location.assign(this.href);
+  },{passive:false});
+});
+</script>
+</body>
+</html>
